@@ -15,11 +15,30 @@ function richiestaFilm() {
         var film = data_risultati.results;
         for (var i = 0; i < film.length; i++) {
           var rating = Math.floor(film[i].vote_average / 2);
-
+          var lingua_bandiera = film[i].original_language;
+          var bandiera = '';
+          if (lingua_bandiera == 'it') {
+            bandiera = '<img class="bandiera" src="https://image.flaticon.com/icons/png/512/206/206839.png" alt="">'
+          }
+          else if (lingua_bandiera == 'en') {
+            bandiera = '<img class="bandiera" src="https://image.flaticon.com/icons/png/512/206/206592.png" alt="">'
+          }
+          else if (lingua_bandiera == 'fr') {
+            bandiera = '<img class="bandiera" src="https://image.flaticon.com/icons/png/512/206/206657.png" alt="">'
+          }
+          else if (lingua_bandiera == 'es') {
+            bandiera = '<img class="bandiera" src="https://image.flaticon.com/icons/png/512/206/206724.png" alt="">'
+          }
+          else if (lingua_bandiera == 'de') {
+            bandiera = '<img class="bandiera" src="https://image.flaticon.com/icons/png/512/206/206690.png" alt="">'
+          }
+          else {
+            bandiera = film[i].original_language
+          }
           var context = {
             titolo : film[i].title,
             titolo_originale : film[i].original_title,
-            lingua : film[i].original_language,
+            lingua : bandiera,
             voto : '<i class="fas fa-star"></i>'.repeat(rating)
           }
           var html = template(context);
@@ -53,11 +72,31 @@ function richiestaSerieTv() {
       if (data_risultati.total_results > 0) {
         var film = data_risultati.results;
         for (var i = 0; i < film.length; i++) {
-          var rating = Math.floor(film[i].vote_average / 2)
+          var rating = Math.floor(film[i].vote_average / 2);
+          var lingua_bandiera = film[i].original_language;
+          var bandiera = '';
+          if (lingua_bandiera == 'it') {
+            bandiera = '<img class="bandiera" src="https://image.flaticon.com/icons/png/512/206/206839.png" alt="">'
+          }
+          else if (lingua_bandiera == 'en') {
+            bandiera = '<img class="bandiera" src="https://image.flaticon.com/icons/png/512/206/206592.png" alt="">'
+          }
+          else if (lingua_bandiera == 'fr') {
+            bandiera = '<img class="bandiera" src="https://image.flaticon.com/icons/png/512/206/206657.png" alt="">'
+          }
+          else if (lingua_bandiera == 'es') {
+            bandiera = '<img class="bandiera" src="https://image.flaticon.com/icons/png/512/206/206724.png" alt="">'
+          }
+          else if (lingua_bandiera == 'de') {
+            bandiera = '<img class="bandiera" src="https://image.flaticon.com/icons/png/512/206/206690.png" alt="">'
+          }
+          else {
+            bandiera = film[i].original_language
+          }
           var context = {
             titolo : film[i].name,
             titolo_originale : film[i].original_name,
-            lingua : film[i].original_language,
+            lingua : bandiera,
             voto : '<i class="fas fa-star"></i>'.repeat(rating)
           }
           var html = template(context);
