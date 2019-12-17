@@ -1,3 +1,44 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: 'Roboto', sans-serif;
+}
+
+header{
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: black
+}
+
+.header-left h1{
+  color: red;
+}
+
+.header-right button{
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-size: 18px;
+}
+
+.header-right input[type=text]{
+  outline:none;
+  border: none;
+  background-color: transparent;
+  color: white;
+  border-bottom: 2px solid red;
+}
+
+
+
 .bandiera{
   width: 25px;
 }
