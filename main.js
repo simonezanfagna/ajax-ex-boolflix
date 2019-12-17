@@ -14,18 +14,20 @@ function richiestaFilm() {
       if (data_risultati.total_results > 0) {
         var film = data_risultati.results;
         for (var i = 0; i < film.length; i++) {
+          var rating = Math.floor(film[i].vote_average / 2);
+
           var context = {
             titolo : film[i].title,
             titolo_originale : film[i].original_title,
             lingua : film[i].original_language,
-            voto : film[i].vote_average
+            voto : '<i class="fas fa-star"></i>'.repeat(rating)
           }
           var html = template(context);
           $('.container-film').append(html);
         }
       }
       else {
-        $('.container-film').html('<p class="risultato_vuoto">Non ci sono risultati</p>')
+        $('.container-film').html('<p class="risultato_vuoto">Nessun risultato trovato per il film: "'+ $('input').val() +'" </p>')
       }
 
     },
@@ -51,18 +53,19 @@ function richiestaSerieTv() {
       if (data_risultati.total_results > 0) {
         var film = data_risultati.results;
         for (var i = 0; i < film.length; i++) {
+          var rating = Math.floor(film[i].vote_average / 2)
           var context = {
             titolo : film[i].name,
             titolo_originale : film[i].original_name,
             lingua : film[i].original_language,
-            voto : film[i].vote_average
+            voto : '<i class="fas fa-star"></i>'.repeat(rating)
           }
           var html = template(context);
           $('.container-tv').append(html);
         }
       }
       else {
-        $('.container-tv').html('<p class="risultato_vuoto">Non ci sono risultati</p>')
+        $('.container-tv').html('<p class="risultato_vuoto">Nessun risultato trovato per la serie tv: "'+ $('input').val() +'" </p>')
       }
 
     },
