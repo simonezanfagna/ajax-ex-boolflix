@@ -40,7 +40,8 @@ function richiestaFilm() {
             titolo : film[i].title,
             titolo_originale : film[i].original_title,
             lingua : bandiera,
-            voto : '<i class="fas fa-star"></i>'.repeat(rating)
+            voto : '<i class="fas fa-star"></i>'.repeat(rating),
+            trama : '<p class="trama">' + film[i].overview + '</p>'
           }
           var html = template(context);
           $('.container-film').append(html);
@@ -99,7 +100,8 @@ function richiestaSerieTv() {
             titolo : film[i].name,
             titolo_originale : film[i].original_name,
             lingua : bandiera,
-            voto : '<i class="fas fa-star"></i>'.repeat(rating)
+            voto : '<i class="fas fa-star"></i>'.repeat(rating),
+            trama : '<p class="trama">' + film[i].overview + '</p>'
           }
           var html = template(context);
           $('.container-tv').append(html);

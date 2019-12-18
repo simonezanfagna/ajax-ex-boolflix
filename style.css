@@ -25,6 +25,10 @@ h2, h3, p{
   padding-left: 20px;
 }
 
+p.trama{
+  font-weight: 400;
+}
+
 .fa-star {
   color: gold;
 }
@@ -110,6 +114,7 @@ main{
   background-color: rgba(0, 0, 0, 0.92);
   padding: 5px;
   display: none;
+  overflow-y: auto;
 }
 
 .bandiera{
@@ -119,4 +124,19 @@ main{
 
 .info-film:hover .film_serieTv{
   display: block;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
 }
