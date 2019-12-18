@@ -37,7 +37,9 @@ header{
   border-bottom: 2px solid red;
 }
 
-
+.container h1{
+  display: none;
+}
 
 .bandiera{
   width: 25px;

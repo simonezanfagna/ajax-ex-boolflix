@@ -14,7 +14,7 @@ function richiestaFilm() {
       if (data_risultati.total_results > 0) {
         var film = data_risultati.results;
         for (var i = 0; i < film.length; i++) {
-          var rating = Math.floor(film[i].vote_average / 2);
+          var rating = Math.round(film[i].vote_average / 2);
           var lingua_bandiera = film[i].original_language;
           var bandiera = '';
           if (lingua_bandiera == 'it') {
@@ -72,7 +72,7 @@ function richiestaSerieTv() {
       if (data_risultati.total_results > 0) {
         var film = data_risultati.results;
         for (var i = 0; i < film.length; i++) {
-          var rating = Math.floor(film[i].vote_average / 2);
+          var rating = Math.round(film[i].vote_average / 2);
           var lingua_bandiera = film[i].original_language;
           var bandiera = '';
           if (lingua_bandiera == 'it') {
@@ -118,6 +118,7 @@ $('#ricerca').click(function () {
   // console.log($('input').val());
   $('.container-film').empty();
   $('.container-tv').empty();
+  $('.container h1').show()
   richiestaFilm();
   richiestaSerieTv();
 })
@@ -126,6 +127,7 @@ $('input').keypress(function (event) {
   if (event.which == 13) {
     $('.container-film').empty();
     $('.container-tv').empty();
+    $('.container h1').show();
     richiestaFilm();
     richiestaSerieTv();
   }
