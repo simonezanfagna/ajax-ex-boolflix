@@ -36,6 +36,7 @@ function richiestaFilm() {
             bandiera = film[i].original_language
           }
           var context = {
+            poster : 'https://image.tmdb.org/t/p/w342' + film[i].poster_path,
             titolo : film[i].title,
             titolo_originale : film[i].original_title,
             lingua : bandiera,
@@ -94,6 +95,7 @@ function richiestaSerieTv() {
             bandiera = film[i].original_language
           }
           var context = {
+            poster : 'https://image.tmdb.org/t/p/w342' + film[i].poster_path,
             titolo : film[i].name,
             titolo_originale : film[i].original_name,
             lingua : bandiera,
