@@ -17,7 +17,7 @@ header{
   background-color: black
 }
 
-h2, h3, p{
+h2, h3, p, span{
   color: white;
 }
 
@@ -79,6 +79,7 @@ main{
   width: 342px;
   height: 513px;
   object-fit: cover;
+  color: white;
 }
 
 .container-film{
