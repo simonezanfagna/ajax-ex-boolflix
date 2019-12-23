@@ -1,3 +1,28 @@
+var lista_generi_film = [];
+var lista_generi_serieTv = [];
+$.ajax({
+  'url' : 'https://api.themoviedb.org/3/genre/movie/list?api_key=019a2902fdf24d4c02b2b7ba7c7acbd9&language=it',
+  'method' : 'GET',
+  'success' : function (data) {
+    var genere = data.genres;
+    for (var i = 0; i < genere.length; i++) {
+      lista_generi_film.push(genere[i]);
+    }
+  }
+})
+// console.log(lista_generi_film);
+$.ajax({
+  'url' : 'https://api.themoviedb.org/3/genre/tv/list?api_key=019a2902fdf24d4c02b2b7ba7c7acbd9&language=it',
+  'method' : 'GET',
+  'success' : function (data) {
+    var genere = data.genres;
+    for (var i = 0; i < genere.length; i++) {
+      lista_generi_serieTv.push(genere[i]);
+    }
+  }
+})
+// console.log(lista_generi_serieTv);
+
 function richiestaFilm() {
   var source = $('#entry-template').html();
   var template = Handlebars.compile(source);
@@ -35,13 +60,26 @@ function richiestaFilm() {
           else {
             bandiera = film[i].original_language
           }
+
+          var lista_generi = film[i].genre_ids;
+          var genere_film ='';
+          for (var c = 0; c < lista_generi.length; c++) {
+            var genere_numero = lista_generi[c];
+            for (var n = 0; n < lista_generi_film.length; n++) {
+              if (genere_numero == lista_generi_film[n].id) {
+                genere_film += ' ' + lista_generi_film[n].name;
+              }
+            }
+          }
+
           var context = {
             poster : 'https://image.tmdb.org/t/p/w342' + film[i].poster_path,
             titolo : film[i].title,
             titolo_originale : film[i].original_title,
             lingua : bandiera,
             voto : '<i class="fas fa-star"></i>'.repeat(rating),
-            trama : '<p class="trama">' + film[i].overview + '</p>'
+            trama : '<p class="trama">' + film[i].overview + '</p>',
+            genere : genere_film
           }
           var html = template(context);
           $('.container-film').append(html);
@@ -95,13 +133,26 @@ function richiestaSerieTv() {
           else {
             bandiera = film[i].original_language
           }
+
+          var lista_generi = film[i].genre_ids;
+          var genere_tv ='';
+          for (var c = 0; c < lista_generi.length; c++) {
+            var genere_numero = lista_generi[c];
+            for (var n = 0; n < lista_generi_serieTv.length; n++) {
+              if (genere_numero == lista_generi_serieTv[n].id) {
+                genere_tv += ' ' + lista_generi_serieTv[n].name;
+              }
+            }
+          }
+
           var context = {
             poster : 'https://image.tmdb.org/t/p/w342' + film[i].poster_path,
             titolo : film[i].name,
             titolo_originale : film[i].original_name,
             lingua : bandiera,
             voto : '<i class="fas fa-star"></i>'.repeat(rating),
-            trama : '<p class="trama">' + film[i].overview + '</p>'
+            trama : '<p class="trama">' + film[i].overview + '</p>',
+            genere : genere_tv
           }
           var html = template(context);
           $('.container-tv').append(html);
