@@ -39,6 +39,7 @@ p.trama{
 
 .header-left h1{
   color: red;
+  cursor: pointer;
 }
 
 .header-right button{
@@ -73,7 +74,7 @@ main{
 }
 
 .container h1{
-  display: none;
+  /* display: none; */
   margin-top: 50px;
   color: white;
   margin-left: 20px;

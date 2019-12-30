@@ -29,6 +29,51 @@ $.ajax({
 })
 // console.log(lista_generi_serieTv);
 
+// ---------HOME PAGE-------------------------------------
+$.ajax({
+  'url' : 'https://api.themoviedb.org/3/movie/popular?api_key=019a2902fdf24d4c02b2b7ba7c7acbd9&language=it&page=1',
+  'method' : 'GET',
+  'success' : function (data_risultati) {
+    // console.log(data_risultati);
+    if (data_risultati.total_results > 0) {
+      var film = data_risultati.results;
+      for (var i = 0; i < film.length; i++) {
+        var movie = film[i];
+        strutturaFilm(movie);
+      }
+    }
+    else {
+      $('.container-film').html('<p class="risultato_vuoto">Nessun risultato trovato per il film: "'+ $('input').val() +'" </p>')
+    }
+
+  },
+  'error' : function () {
+    alert('errore');
+  }
+});
+
+$.ajax({
+  'url' : 'https://api.themoviedb.org/3/tv/popular?api_key=019a2902fdf24d4c02b2b7ba7c7acbd9&language=it&page=1',
+  'method' : 'GET',
+  'success' : function (data_risultati) {
+    // console.log(data_risultati);
+    if (data_risultati.total_results > 0) {
+      var film = data_risultati.results;
+      for (var i = 0; i < film.length; i++) {
+        var serie = film[i];
+        strutturaSerieTv(serie);
+      }
+    }
+    else {
+      $('.container-tv').html('<p class="risultato_vuoto">Nessun risultato trovato per la serie tv: "'+ $('input').val() +'" </p>')
+    }
+
+  },
+  'error' : function () {
+    alert('errore');
+  }
+});
+// ------------------------------------------------------
 
 function richiestaFilm() {
 
@@ -244,4 +289,53 @@ $('input').keypress(function (event) {
     richiestaFilm();
     richiestaSerieTv();
   }
+})
+
+$('.header-left h1').click(function () {
+  $('input').val('');
+  $('.container-film').empty();
+  $('.container-tv').empty();
+  $.ajax({
+    'url' : 'https://api.themoviedb.org/3/movie/popular?api_key=019a2902fdf24d4c02b2b7ba7c7acbd9&language=it&page=1',
+    'method' : 'GET',
+    'success' : function (data_risultati) {
+      // console.log(data_risultati);
+      if (data_risultati.total_results > 0) {
+        var film = data_risultati.results;
+        for (var i = 0; i < film.length; i++) {
+          var movie = film[i];
+          strutturaFilm(movie);
+        }
+      }
+      else {
+        $('.container-film').html('<p class="risultato_vuoto">Nessun risultato trovato per il film: "'+ $('input').val() +'" </p>')
+      }
+
+    },
+    'error' : function () {
+      alert('errore');
+    }
+  });
+
+  $.ajax({
+    'url' : 'https://api.themoviedb.org/3/tv/popular?api_key=019a2902fdf24d4c02b2b7ba7c7acbd9&language=it&page=1',
+    'method' : 'GET',
+    'success' : function (data_risultati) {
+      // console.log(data_risultati);
+      if (data_risultati.total_results > 0) {
+        var film = data_risultati.results;
+        for (var i = 0; i < film.length; i++) {
+          var serie = film[i];
+          strutturaSerieTv(serie);
+        }
+      }
+      else {
+        $('.container-tv').html('<p class="risultato_vuoto">Nessun risultato trovato per la serie tv: "'+ $('input').val() +'" </p>')
+      }
+
+    },
+    'error' : function () {
+      alert('errore');
+    }
+  });
 })
