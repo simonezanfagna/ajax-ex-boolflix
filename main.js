@@ -13,7 +13,7 @@ $.ajax({
     alert('errore');
   }
 })
-// console.log(lista_generi_film);
+console.log(lista_generi_film);
 $.ajax({
   'url' : 'https://api.themoviedb.org/3/genre/tv/list?api_key=019a2902fdf24d4c02b2b7ba7c7acbd9&language=it',
   'method' : 'GET',
@@ -27,7 +27,7 @@ $.ajax({
     alert('errore');
   }
 })
-// console.log(lista_generi_serieTv);
+console.log(lista_generi_serieTv);
 
 // ---------HOME PAGE-------------------------------------
 $.ajax({
@@ -274,6 +274,8 @@ function strutturaSerieTv(s) {
 
 $('#ricerca').click(function () {
   // console.log($('input').val());
+  $('#genere-film').val("");
+  $("#genere-tv").val("");
   $('.container-film').empty();
   $('.container-tv').empty();
   $('.container h1').show()
@@ -283,6 +285,8 @@ $('#ricerca').click(function () {
 
 $('input').keypress(function (event) {
   if (event.which == 13) {
+    $('#genere-film').val("");
+    $("#genere-tv").val("");
     $('.container-film').empty();
     $('.container-tv').empty();
     $('.container h1').show();
@@ -292,6 +296,8 @@ $('input').keypress(function (event) {
 })
 
 $('.header-left h1').click(function () {
+  $('#genere-film').val("");
+  $("#genere-tv").val("");
   $('input').val('');
   $('.container-film').empty();
   $('.container-tv').empty();
@@ -338,4 +344,38 @@ $('.header-left h1').click(function () {
       alert('errore');
     }
   });
+})
+
+$("#genere-film").change(function () {
+  var genereScelto = $(this).val();
+  if (genereScelto == "") {
+    $('.container-film .info-film').show();
+  }
+  else {
+    $('.container-film .info-film').each(function () {
+      if ($(this).attr('data-genere').includes(genereScelto)) {
+        $(this).show();
+      }
+      else {
+        $(this).hide();
+      }
+    })
+  }
+})
+
+$("#genere-tv").change(function () {
+  var genereScelto = $(this).val();
+  if (genereScelto == "") {
+    $('.container-tv .info-film').show();
+  }
+  else {
+    $('.container-tv .info-film').each(function () {
+      if ($(this).attr('data-genere').includes(genereScelto)) {
+        $(this).show();
+      }
+      else {
+        $(this).hide();
+      }
+    })
+  }
 })
