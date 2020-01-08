@@ -14,7 +14,7 @@ header{
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  background-color: black
+  background-color: black;
 }
 
 h2, h3, p, span{
@@ -74,11 +74,19 @@ label{
 }
 
 select{
-  background-color: #202020;
   color: white;
   outline:none;
   border: none;
   cursor: pointer;
+}
+
+#scegliLingua{
+  background-color: black;
+  margin-right: 25px;
+}
+
+#genere-film, #genere-tv {
+  background-color: #202020;
 }
 
 option{

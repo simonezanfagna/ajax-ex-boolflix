@@ -1,7 +1,9 @@
+var linguaggio = $('#scegliLingua').val();
+
 var lista_generi_film = [];
 var lista_generi_serieTv = [];
 $.ajax({
-  'url' : 'https://api.themoviedb.org/3/genre/movie/list?api_key=019a2902fdf24d4c02b2b7ba7c7acbd9&language=it',
+  'url' : 'https://api.themoviedb.org/3/genre/movie/list?api_key=019a2902fdf24d4c02b2b7ba7c7acbd9&language='+ linguaggio,
   'method' : 'GET',
   'success' : function (data) {
     var genere = data.genres;
@@ -15,7 +17,7 @@ $.ajax({
 })
 console.log(lista_generi_film);
 $.ajax({
-  'url' : 'https://api.themoviedb.org/3/genre/tv/list?api_key=019a2902fdf24d4c02b2b7ba7c7acbd9&language=it',
+  'url' : 'https://api.themoviedb.org/3/genre/tv/list?api_key=019a2902fdf24d4c02b2b7ba7c7acbd9&language='+ linguaggio,
   'method' : 'GET',
   'success' : function (data) {
     var genere = data.genres;
@@ -31,7 +33,12 @@ console.log(lista_generi_serieTv);
 
 // ---------HOME PAGE-------------------------------------
 $.ajax({
-  'url' : 'https://api.themoviedb.org/3/movie/popular?api_key=019a2902fdf24d4c02b2b7ba7c7acbd9&language=it&page=1',
+  'url' : 'https://api.themoviedb.org/3/movie/popular',
+  'data' : {
+    'api_key' : '019a2902fdf24d4c02b2b7ba7c7acbd9',
+    'language' : $('#scegliLingua').val(),
+    'page' : '1'
+  },
   'method' : 'GET',
   'success' : function (data_risultati) {
     // console.log(data_risultati);
@@ -53,7 +60,12 @@ $.ajax({
 });
 
 $.ajax({
-  'url' : 'https://api.themoviedb.org/3/tv/popular?api_key=019a2902fdf24d4c02b2b7ba7c7acbd9&language=it&page=1',
+  'url' : 'https://api.themoviedb.org/3/tv/popular',
+  'data' : {
+    'api_key' : '019a2902fdf24d4c02b2b7ba7c7acbd9',
+    'language' : $('#scegliLingua').val(),
+    'page' : '1'
+  },
   'method' : 'GET',
   'success' : function (data_risultati) {
     // console.log(data_risultati);
@@ -82,7 +94,7 @@ function richiestaFilm() {
     'data' : {
       'api_key' : '019a2902fdf24d4c02b2b7ba7c7acbd9',
       'query' : $('input').val(),
-      'language' : 'it'
+      'language' : $('#scegliLingua').val()
     },
     'method' : 'GET',
     'success' : function (data_risultati) {
@@ -180,7 +192,7 @@ function richiestaSerieTv() {
     'data' : {
       'api_key' : '019a2902fdf24d4c02b2b7ba7c7acbd9',
       'query' : $('input').val(),
-      'language' : 'it'
+      'language' : $('#scegliLingua').val()
     },
     'method' : 'GET',
     'success' : function (data_risultati) {
@@ -302,7 +314,12 @@ $('.header-left h1').click(function () {
   $('.container-film').empty();
   $('.container-tv').empty();
   $.ajax({
-    'url' : 'https://api.themoviedb.org/3/movie/popular?api_key=019a2902fdf24d4c02b2b7ba7c7acbd9&language=it&page=1',
+    'url' : 'https://api.themoviedb.org/3/movie/popular',
+    'data' : {
+      'api_key' : '019a2902fdf24d4c02b2b7ba7c7acbd9',
+      'language' : $('#scegliLingua').val(),
+      'page' : '1'
+    },
     'method' : 'GET',
     'success' : function (data_risultati) {
       // console.log(data_risultati);
@@ -324,7 +341,12 @@ $('.header-left h1').click(function () {
   });
 
   $.ajax({
-    'url' : 'https://api.themoviedb.org/3/tv/popular?api_key=019a2902fdf24d4c02b2b7ba7c7acbd9&language=it&page=1',
+    'url' : 'https://api.themoviedb.org/3/tv/popular',
+    'data' : {
+      'api_key' : '019a2902fdf24d4c02b2b7ba7c7acbd9',
+      'language' : $('#scegliLingua').val(),
+      'page' : '1'
+    },
     'method' : 'GET',
     'success' : function (data_risultati) {
       // console.log(data_risultati);
