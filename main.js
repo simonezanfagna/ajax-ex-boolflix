@@ -42,6 +42,14 @@ $.ajax({
   'method' : 'GET',
   'success' : function (data_risultati) {
     // console.log(data_risultati);
+    var pagine = data_risultati.total_pages;
+    var x = 1;
+    while (x <= pagine ) {
+      $('.pagine-film').append('<i class="fas fa-circle circle-film"></i>');
+      x++;
+    }
+    $('.pagine-film .fa-circle:first-child').addClass('colorWhite');
+    console.log(data_risultati.total_pages);
     if (data_risultati.total_results > 0) {
       var film = data_risultati.results;
       for (var i = 0; i < film.length; i++) {
@@ -69,6 +77,13 @@ $.ajax({
   'method' : 'GET',
   'success' : function (data_risultati) {
     // console.log(data_risultati);
+    var pagine = data_risultati.total_pages;
+    var x = 1;
+    while (x <= pagine ) {
+      $('.pagine-tv').append('<i class="fas fa-circle circle-tv"></i>');
+      x++;
+    }
+    $('.pagine-tv .fa-circle:first-child').addClass('colorWhite');
     if (data_risultati.total_results > 0) {
       var film = data_risultati.results;
       for (var i = 0; i < film.length; i++) {
@@ -94,11 +109,19 @@ function richiestaFilm() {
     'data' : {
       'api_key' : '019a2902fdf24d4c02b2b7ba7c7acbd9',
       'query' : $('input').val(),
-      'language' : $('#scegliLingua').val()
+      'language' : $('#scegliLingua').val(),
+      'page' : '1'
     },
     'method' : 'GET',
     'success' : function (data_risultati) {
-      // console.log(data_risultati);
+      // console.log(data_risultati.total_pages);
+      var pagine = data_risultati.total_pages;
+      var x = 1;
+      while (x <= pagine ) {
+        $('.pagine-film').append('<i class="fas fa-circle circle-film-ricerca"></i>');
+        x++;
+      }
+      $('.pagine-film .fa-circle:first-child').addClass('colorWhite');
       if (data_risultati.total_results > 0) {
         var film = data_risultati.results;
         for (var i = 0; i < film.length; i++) {
@@ -192,11 +215,19 @@ function richiestaSerieTv() {
     'data' : {
       'api_key' : '019a2902fdf24d4c02b2b7ba7c7acbd9',
       'query' : $('input').val(),
-      'language' : $('#scegliLingua').val()
+      'language' : $('#scegliLingua').val(),
+      'page' : '1'
     },
     'method' : 'GET',
     'success' : function (data_risultati) {
       // console.log(data_risultati);
+      var pagine = data_risultati.total_pages;
+      var x = 1;
+      while (x <= pagine ) {
+        $('.pagine-tv').append('<i class="fas fa-circle circle-tv-ricerca"></i>');
+        x++;
+      }
+      $('.pagine-tv .fa-circle:first-child').addClass('colorWhite');
       if (data_risultati.total_results > 0) {
         var film = data_risultati.results;
         for (var i = 0; i < film.length; i++) {
@@ -290,7 +321,9 @@ $('#ricerca').click(function () {
   $("#genere-tv").val("");
   $('.container-film').empty();
   $('.container-tv').empty();
-  $('.container h1').show()
+  $('.container h1').show();
+  $('.pagine-film').empty();
+  $('.pagine-tv').empty();
   richiestaFilm();
   richiestaSerieTv();
 })
@@ -302,6 +335,8 @@ $('input').keypress(function (event) {
     $('.container-film').empty();
     $('.container-tv').empty();
     $('.container h1').show();
+    $('.pagine-film').empty();
+    $('.pagine-tv').empty();
     richiestaFilm();
     richiestaSerieTv();
   }
@@ -313,6 +348,12 @@ $('.header-left h1').click(function () {
   $('input').val('');
   $('.container-film').empty();
   $('.container-tv').empty();
+  $('.pagine-film').empty();
+  $('.pagine-tv').empty();
+  $('.pagine-film .fa-circle').removeClass('colorWhite');
+  $('.pagine-film .fa-circle:first-child').addClass('colorWhite');
+  $('.pagine-tv .fa-circle').removeClass('colorWhite');
+  $('.pagine-tv .fa-circle:first-child').addClass('colorWhite');
   $.ajax({
     'url' : 'https://api.themoviedb.org/3/movie/popular',
     'data' : {
@@ -323,6 +364,15 @@ $('.header-left h1').click(function () {
     'method' : 'GET',
     'success' : function (data_risultati) {
       // console.log(data_risultati);
+      var pagine = data_risultati.total_pages;
+      //$('.pagine-film').append('<i class="fas fa-circle"></i>'.repeat(pagine));
+      var x = 1;
+      while (x <= pagine ) {
+        $('.pagine-film').append('<i class="fas fa-circle circle-film"></i>');
+        x++;
+      }
+      $('.pagine-film .fa-circle:first-child').addClass('colorWhite');
+      console.log(data_risultati.total_pages);
       if (data_risultati.total_results > 0) {
         var film = data_risultati.results;
         for (var i = 0; i < film.length; i++) {
@@ -350,6 +400,13 @@ $('.header-left h1').click(function () {
     'method' : 'GET',
     'success' : function (data_risultati) {
       // console.log(data_risultati);
+      var pagine = data_risultati.total_pages;
+      var x = 1;
+      while (x <= pagine ) {
+        $('.pagine-tv').append('<i class="fas fa-circle circle-tv"></i>');
+        x++;
+      }
+      $('.pagine-tv .fa-circle:first-child').addClass('colorWhite');
       if (data_risultati.total_results > 0) {
         var film = data_risultati.results;
         for (var i = 0; i < film.length; i++) {
@@ -400,4 +457,158 @@ $("#genere-tv").change(function () {
       }
     })
   }
+})
+
+// ---------------GESTIONE PAGINE HOME PAGE ---------------
+
+$(document).on("click",".fa-circle.circle-film",function () {
+  $("#genere-film").val("");
+  var questo = $(this);
+  var indicePagina = questo.index();
+  var pagina = indicePagina + 1;
+  $('.pagine-film .fa-circle:first-child').removeClass('colorWhite');
+  $('.pagine-film .fa-circle').removeClass('colorWhite');
+  $(this).addClass('colorWhite');
+  $('.container-film').empty();
+  $.ajax({
+    'url' : 'https://api.themoviedb.org/3/movie/popular',
+    'data' : {
+      'api_key' : '019a2902fdf24d4c02b2b7ba7c7acbd9',
+      'language' : $('#scegliLingua').val(),
+      'page' : pagina
+    },
+    'method' : 'GET',
+    'success' : function (data_risultati) {
+      // console.log(data_risultati);
+      if (data_risultati.total_results > 0) {
+        var film = data_risultati.results;
+        for (var i = 0; i < film.length; i++) {
+          var movie = film[i];
+          strutturaFilm(movie);
+        }
+      }
+      else {
+        $('.container-film').html('<p class="risultato_vuoto">Nessun risultato trovato per il film: "'+ $('input').val() +'" </p>')
+      }
+
+    },
+    'error' : function () {
+      alert('errore');
+    }
+  });
+})
+
+$(document).on("click",".fa-circle.circle-tv",function () {
+  $("#genere-tv").val("");
+  var questo = $(this);
+  var indicePagina = questo.index();
+  var pagina = indicePagina + 1;
+  $('.pagine-tv .fa-circle:first-child').removeClass('colorWhite');
+  $('.pagine-tv .fa-circle').removeClass('colorWhite');
+  $(this).addClass('colorWhite');
+  $('.container-tv').empty();
+  $.ajax({
+    'url' : 'https://api.themoviedb.org/3/tv/popular',
+    'data' : {
+      'api_key' : '019a2902fdf24d4c02b2b7ba7c7acbd9',
+      'language' : $('#scegliLingua').val(),
+      'page' : pagina
+    },
+    'method' : 'GET',
+    'success' : function (data_risultati) {
+      // console.log(data_risultati);
+      if (data_risultati.total_results > 0) {
+        var film = data_risultati.results;
+        for (var i = 0; i < film.length; i++) {
+          var serie = film[i];
+          strutturaSerieTv(serie);
+        }
+      }
+      else {
+        $('.container-tv').html('<p class="risultato_vuoto">Nessun risultato trovato per la serie tv: "'+ $('input').val() +'" </p>')
+      }
+
+    },
+    'error' : function () {
+      alert('errore');
+    }
+  });
+})
+
+// ---------GESTIONE PAGINE RICERCA ------------------
+
+$(document).on("click",".fa-circle.circle-film-ricerca",function () {
+  $("#genere-film").val("");
+  var questo = $(this);
+  var indicePagina = questo.index();
+  var pagina = indicePagina + 1;
+  $('.pagine-film .fa-circle:first-child').removeClass('colorWhite');
+  $('.pagine-film .fa-circle').removeClass('colorWhite');
+  $(this).addClass('colorWhite');
+  $('.container-film').empty();
+  $.ajax({
+    'url' : 'https://api.themoviedb.org/3/search/movie',
+    'data' : {
+      'api_key' : '019a2902fdf24d4c02b2b7ba7c7acbd9',
+      'query' : $('input').val(),
+      'language' : $('#scegliLingua').val(),
+      'page' : pagina
+    },
+    'method' : 'GET',
+    'success' : function (data_risultati) {
+      // console.log(data_risultati);
+      if (data_risultati.total_results > 0) {
+        var film = data_risultati.results;
+        for (var i = 0; i < film.length; i++) {
+          var movie = film[i];
+          strutturaFilm(movie);
+        }
+      }
+      else {
+        $('.container-film').html('<p class="risultato_vuoto">Nessun risultato trovato per il film: "'+ $('input').val() +'" </p>')
+      }
+
+    },
+    'error' : function () {
+      alert('errore');
+    }
+  });
+})
+
+$(document).on("click",".fa-circle.circle-tv-ricerca",function () {
+  $("#genere-tv").val("");
+  var questo = $(this);
+  var indicePagina = questo.index();
+  var pagina = indicePagina + 1;
+  $('.pagine-tv .fa-circle:first-child').removeClass('colorWhite');
+  $('.pagine-tv .fa-circle').removeClass('colorWhite');
+  $(this).addClass('colorWhite');
+  $('.container-tv').empty();
+  $.ajax({
+    'url' : 'https://api.themoviedb.org/3/search/tv',
+    'data' : {
+      'api_key' : '019a2902fdf24d4c02b2b7ba7c7acbd9',
+      'query' : $('input').val(),
+      'language' : $('#scegliLingua').val(),
+      'page' : pagina
+    },
+    'method' : 'GET',
+    'success' : function (data_risultati) {
+      // console.log(data_risultati);
+      if (data_risultati.total_results > 0) {
+        var film = data_risultati.results;
+        for (var i = 0; i < film.length; i++) {
+          var serie = film[i];
+          strutturaSerieTv(serie);
+        }
+      }
+      else {
+        $('.container-tv').html('<p class="risultato_vuoto">Nessun risultato trovato per la serie tv: "'+ $('input').val() +'" </p>')
+      }
+
+    },
+    'error' : function () {
+      alert('errore');
+    }
+  });
 })

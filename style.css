@@ -29,6 +29,25 @@ h2, h3{
   padding-left: 20px;
 }
 
+/* .pagine-film:first-child{
+  color: white;
+} */
+
+.fa-circle{
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.fa-circle:hover{
+  color: gray;
+}
+
+.colorWhite{
+  color: white;
+}
+
 p.trama{
   font-weight: 400;
 }
@@ -160,6 +179,15 @@ main{
   padding: 5px;
   display: none;
   overflow-y: auto;
+}
+
+.pagine-film, .pagine-tv{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.pagine-tv{
+  margin-bottom: 20px;
 }
 
 .bandiera{
